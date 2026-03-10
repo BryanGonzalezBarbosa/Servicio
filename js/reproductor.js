@@ -13,6 +13,7 @@ const btnReproducir = document.getElementById('btnReproducirPrueba');
 const btnCerrar = document.getElementById('btnCerrar');
 const reproductor = document.getElementById('miReproductor');
 const tituloModal = document.getElementById('tituloCancionPrueba');
+const btnDescargar = document.getElementById('btnDescargar');
 
 // 2. GENERAR LA LISTA AUTOMÁTICAMENTE
 miLibreria.forEach(cancion => {
@@ -29,6 +30,8 @@ miLibreria.forEach(cancion => {
     boton.addEventListener('click', function() {
         reproductor.src = this.dataset.src;
         tituloModal.textContent = `Prueba: ${this.dataset.nombre}`; // Cambia el título del cuadradito
+        btnDescargar.href = this.dataset.src; // Le pasamos la ruta de la canción
+        btnDescargar.download = cancion.archivo; // Le decimos con qué nombre guardarlo
         modal.style.display = 'block';
         reproductor.pause(); 
         btnReproducir.textContent = '▶️ Reproducir prueba';
