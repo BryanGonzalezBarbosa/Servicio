@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Sección de Música</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <h1>Biblioteca Musical</h1>
+
+    <ul id="contenedorCanciones"></ul>
+
+    <div id="cuadraditoPrueba" style="display: none; border: 2px solid black; padding: 20px; margin-top: 20px;">
+        <h3 id="tituloCancionPrueba">Escuchar fragmento</h3>
+        <p>Estás a punto de escuchar una muestra de 30 segundos.</p>
+        <button id="btnReproducirPrueba">Reproducir prueba</button>
+        <button id="btnCerrar">Cerrar</button>
+    </div>
+
+    <audio id="miReproductor"></audio>
+
+    <script src="../js/reproductor.js"></script>
+</body>
+</html>
