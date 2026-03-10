@@ -14,6 +14,7 @@ const btnCerrar = document.getElementById('btnCerrar');
 const reproductor = document.getElementById('miReproductor');
 const tituloModal = document.getElementById('tituloCancionPrueba');
 const btnDescargar = document.getElementById('btnDescargar');
+const btnDescargarPartitura = document.getElementById('btnDescargarPartitura');
 
 // 2. GENERAR LA LISTA AUTOMÁTICAMENTE
 miLibreria.forEach(cancion => {
@@ -21,7 +22,7 @@ miLibreria.forEach(cancion => {
     const elementoLista = document.createElement('li');
     const boton = document.createElement('button');
     
-    boton.textContent = `🎵 ${cancion.titulo}`;
+    boton.textContent = `${cancion.titulo}`;
     // Le armamos la ruta correcta: salimos de /html y entramos a /assets/musica/
     boton.dataset.src = `../assets/musica/${cancion.archivo}`; 
     boton.dataset.nombre = cancion.titulo;
@@ -32,9 +33,12 @@ miLibreria.forEach(cancion => {
         tituloModal.textContent = `Prueba: ${this.dataset.nombre}`; // Cambia el título del cuadradito
         btnDescargar.href = this.dataset.src; // Le pasamos la ruta de la canción
         btnDescargar.download = cancion.archivo; // Le decimos con qué nombre guardarlo
+        const nombrePdf = cancion.archivo.replace('.mp3', '.pdf');
+        btnDescargarPartitura.href = `../assets/partituras/${nombrePdf}`;
+        btnDescargarPartitura.download = nombrePdf;
         modal.style.display = 'block';
         reproductor.pause(); 
-        btnReproducir.textContent = '▶️ Reproducir prueba';
+        btnReproducir.textContent = 'Reproducir prueba';
     });
 
     elementoLista.appendChild(boton);
@@ -46,11 +50,11 @@ btnReproducir.addEventListener('click', function() {
     if (reproductor.paused) {
         reproductor.currentTime = 0; // empezar desde el inicio
         reproductor.play();
-        btnReproducir.textContent = '⏸️ Pausar prueba';
+        btnReproducir.textContent = 'Pausar prueba';
         reproductor.addEventListener('timeupdate', vigilarTiempo);
     } else {
         reproductor.pause();
-        btnReproducir.textContent = '▶️ Reproducir prueba';
+        btnReproducir.textContent = 'Reproducir prueba';
     }
 });
 
@@ -58,7 +62,7 @@ function vigilarTiempo() {
     if (reproductor.currentTime >= 30) { // detener a los 30 segundos
         reproductor.pause();
         reproductor.currentTime = 0; // opcional: regresar al inicio
-        btnReproducir.textContent = '▶️ Reproducir prueba';
+        btnReproducir.textContent = 'Reproducir prueba';
         reproductor.removeEventListener('timeupdate', vigilarTiempo);
     }
 }
